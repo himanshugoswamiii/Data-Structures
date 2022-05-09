@@ -210,8 +210,5 @@ int main(int argc, char const *argv[])
       printf("\n Press 1 to continue: ");
       scanf("%d",&c);
     } while (c==1);
-    
-
     return 0;
 }
-// 
