@@ -23,6 +23,7 @@ int isFull(struct stack *ptr){
 }
 
 void showStack(struct stack *ptr){
+    printf("\n --- Stack is --- \n");
     for(int i=0;i<=(ptr->top);i++){
         printf("%d\n",ptr->arr[i]);
     }
@@ -32,7 +33,7 @@ void showStack(struct stack *ptr){
 // Push()
 void push(struct stack *ptr,int val){ // Here it's call by refernce
     if (isFull(ptr)==1) {
-        printf("Stack Overflow\n");
+        printf("\nStack Overflow\n");
     }
     else{
         ptr->top++;
@@ -40,10 +41,24 @@ void push(struct stack *ptr,int val){ // Here it's call by refernce
     }
 }
 
+// Pop() - delete the last element and return that as well
+int pop(struct stack *ptr){
+    int val=-1; // Default is for underflow
+    if (isEmpty(ptr)==1){
+        printf("\nStack Underflow. Can't delete\n");
+        return val;
+    }
+    else{
+        val=ptr->arr[ptr->top];
+        ptr->top--;
+        return val;
+    }
+}
+
 int main(){
     // Create a stack
     struct stack *s=(struct stack *)malloc(sizeof(struct stack));
-    s->size=80;
+    s->size=5;
     s->top=-1;
     s->arr=(int *)malloc(s->size * sizeof(int)); // Memory allocation for the array
 
@@ -52,26 +67,36 @@ int main(){
     (s->top)++;
     s->arr[1]=6;
     (s->top)++;
-    int isem=isEmpty(s);
-    int isfu=isFull(s);
 
-    // Stack is empty/ Full
-    if(isem==1){
-        printf("Stack is empty\n");
-    }
-    else {
-        printf("Stack is not empty \n");   
+    // Disaplay for the user
+    int ch=1;
+    while (ch) {
+
+        printf("Enter\n 1 to show the stack\n 2 to push into the stack\n 3 to pop from the stack \n");
+        int choice;
+        scanf("%d",&choice);
+        int pval; // popped value
+        int val;
+        switch (choice) {
+            case 1: 
+                showStack(s);
+                break;
+            case 2: 
+                printf("Enter the value to be inserted into stack\n");
+                scanf("%d",&val);
+                push(s,val);
+                break;
+            case 3:
+                pval=pop(s);
+                printf("Popped element is: %d \n",pval);
+                
+                break;
+            default:
+                break;
+        }
+        printf("Enter 1 to continue 0 to exit \n");
+        scanf("%d",&ch);
     }
 
-    if(isfu==1){
-        printf("Stack is Full\n");
-    }
-    else {
-    printf("Stack is not full\n");
-    }
-
-    showStack(s);
-
-    // 
     return 0;
 }
