@@ -3,16 +3,6 @@
 #include <vector>
 using namespace std;
 
-int factorial(int n){
-    // This function will help us in getting the Array size for permutaions
-    if (n==1){
-        return 1;
-    }
-    int fact;
-    fact=n*factorial(n-1);
-    return fact;
-}
-
 class himanshu{
     public:
         vector<vector<vector<int>>> vect; // Array of vectors
@@ -31,7 +21,7 @@ class himanshu{
         }
 
         void addtoVec(int a[]){
-            if (a[0]!=1)
+            if (a[3]==1)
             {
                 vector <int> v1;
                 v1.push_back(a[0]);
@@ -40,7 +30,7 @@ class himanshu{
                 v1.push_back(a[3]);
                 va.push_back(v1);
             } 
-            if (a[1]!=2){
+            else if (a[3]==2){
                 vector <int> v2;
                 v2.push_back(a[0]);
                 v2.push_back(a[1]);
@@ -48,7 +38,7 @@ class himanshu{
                 v2.push_back(a[3]);
                 vb.push_back(v2);
             }
-            if (a[2]!=3){
+            else if (a[3]==3){
                 vector <int> v3;
                 v3.push_back(a[0]);
                 v3.push_back(a[1]);
@@ -56,7 +46,7 @@ class himanshu{
                 v3.push_back(a[3]);
                 vc.push_back(v3);
             }
-            if (a[3]!=4){
+            else if (a[3]==4){
                 vector <int> v4;
                 v4.push_back(a[0]);
                 v4.push_back(a[1]);
@@ -106,12 +96,15 @@ class himanshu{
 
         void printVec(){
             for (int i = 0; i < vect.size(); i++) {
-            cout<<"\n **  Instances in which A[i] is inserted at : "<<i<<endl;
+            cout<<"\n **  Instances in which A[i] is inserted at : "<<i+1<<endl;
                 for (int j = 0; j < vect[i].size(); j++){
+                    cout << " -- ";
                     for (int k = 0; k < vect[i][j].size(); k++)
                         cout << vect[i][j][k] << " ";
-                cout << " --> ";
                 }
+                cout<<"\n Total no of Permutations : "<<vect[i].size();
+                cout<<"\n Probability that A[i] will be inserted at "<<i+1<<" is "<<" 1/4";
+                cout<<endl;
             }
         }
 }; 
@@ -124,6 +117,7 @@ int main()
     int n = sizeof(Arr)/sizeof(int);
     himanshu H(Arr,n);
     int **m_Arr=new int*[24]; // Multidimensional array
+    cout<<"\n*** Total Combinations of Permutations *** \n";
     H.permute(Arr, 0, n-1);
     H.finalvec();
     H.printVec();
